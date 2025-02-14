@@ -80,10 +80,12 @@ namespace UndertaleModLib
                                       $"Chunk name mismatch: expected \"{name}\", got \"{chunk.Name}\".");
                 chunk.Length = length;
 
-                reader.SubmitMessage("Reading chunk " + chunk.Name);
+                reader.SubmitMessage("!Reading chunk " + chunk.Name);
                 var lenReader = reader.EnsureLengthFromHere(chunk.Length);
                 reader.CopyChunkToBuffer(length);
                 chunk.UnserializeChunk(reader);
+                reader.SubmitMessage("Debug Reading chunk! " + chunk.Name + ":" + name);
+
 
                 reader.SwitchReaderType(false);
                 if (name != "FORM" && name != reader.LastChunkName)
